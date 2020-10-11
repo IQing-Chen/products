@@ -10,4 +10,13 @@ while True:
 	products.append([name, price]) #小清單裝入大清單
 print(products)
 
-products[0][0]
+for p in products:
+	print(p[0], '的價格是', p[1])
+
+#若沒有檔案會自動創建一個新的檔案
+#csv 是excel的格式檔案縮寫
+with open('products.csv', 'w') as f:
+	for p in products:
+		f.write(p[0] + ',' + p[1] + '\n')	
+		#f.write才是寫入檔案
+		#csv檔案是用逗號做區隔
