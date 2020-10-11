@@ -23,6 +23,7 @@ while True:
 	products.append([name, price]) #小清單裝入大清單
 print(products)
 
+#商品的購買記錄
 for p in products:
 	print(p[0], '的價格是', p[1])
 
