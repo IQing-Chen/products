@@ -1,16 +1,23 @@
-#讀取檔案
-products = []
-with open('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f:
-		#跳過欄位
-		if '商品，價格' in line:
-			continue #繼續
-		#split切割完的結果就是清單
-		#strip()除掉換行符號
-		name , price= line.strip().split(',')
-		products.append([name, price])
+#檢查檔案是否存在
+import os #作業系統模組 operating system
 
-print(products)
+
+products = [] #不管有没有找当档案都要有这个空清单
+if os.path.isfile('products.csv'):
+	print('档案有存在')
+	#讀取檔案
+	with open('products.csv', 'r', encoding = 'utf-8') as f:
+		for line in f:
+			#跳過欄位
+			if '商品，價格' in line:
+				continue #繼續
+			#split切割完的結果就是清單
+			#strip()除掉換行符號
+			name , price= line.strip().split(',')
+			products.append([name, price])
+else:
+	print("没有档案")
+
 
 #重复输入商品名称和价格
 #清单中还有清单 = 二维度
