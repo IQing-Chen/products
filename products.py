@@ -1,22 +1,20 @@
 import os #作業系統模組 operating system
 
-#讀取檔案
+#讀取檔案with open(filename, 'r', encoding = 'utf-8') as f:
 def read_file(filename):
-	products = [] #不管有没有找当档案都要有这个空清单
-	if os.path.isfile(filename): #檢查檔案是否存在
-		print('档案有存在')
-		with open(filename, 'r', encoding = 'utf-8') as f:
-			for line in f:
-				#跳過欄位
-				if '商品，價格' in line:
-					continue #繼續
-				#split切割完的結果就是清單
-				#strip()除掉換行符號
-				name , price= line.strip().split(',')
-				products.append([name, price])
-	else:
-		print("没有档案")
-	return products
+	products = []	
+	with open(filename, 'r', encoding = 'utf-8') as f:
+		for line in f:
+			#跳過欄位
+			if '商品，價格' in line:
+				continue #繼續
+			#split切割完的結果就是清單
+			#strip()除掉換行符號
+			name , price= line.strip().split(',')
+			products.append([name, price])
+		return products
+
+	
 
 #重复输入商品名称和价格
 #清单中还有清单 = 二维度
@@ -47,9 +45,16 @@ def write_file(filename, products):
 			#f.write才是寫入檔案
 			#csv檔案是用逗號做區隔
 
+def main():
+	filnema = 'products.csv'
+	#使用function
+	if os.path.isfile(filnema): #檢查檔案是否存在
+		print('档案有存在')
+		products = read_file(filnema)
+	else:
+		print("没有档案")
+	products = user_input(products)
+	print_products(products)
+	write_file('products.csv', products)
 
-#使用function
-products = read_file('products.csv')
-products = user_input(products)
-print_products(products)
-write_file('products.csv', products)
+main()	
